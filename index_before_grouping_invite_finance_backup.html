@@ -867,98 +867,6 @@ table.exec td.actions{text-align:center;width:40px}
   #rsvpTbody input[type="date"]{min-width:126px}
 }
 
-
-
-/* ============================================================
-   AJUSTE FINAL · Navegación agrupada + selección mobile friendly
-   ============================================================ */
-.selection-list{display:flex;flex-direction:column;gap:10px}
-.selection-card{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;background:#fff;padding:12px;box-shadow:0 1px 0 rgba(13,34,64,.03)}
-.selection-card.important{border-left-color:var(--accent);background:linear-gradient(90deg,var(--accent-soft),#fff 45%)}
-.selection-card.selected{border-left-color:var(--green);background:linear-gradient(90deg,var(--green-soft),#fff 45%)}
-.selection-card.wait{border-left-color:var(--amber);background:linear-gradient(90deg,var(--amber-soft),#fff 45%)}
-.selection-card.out{border-left-color:var(--muted);opacity:.82}
-.selection-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:5px}
-.selection-name{font-weight:700;font-size:14px;color:var(--ink);line-height:1.2}
-.selection-meta,.selection-score-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--muted);margin-top:5px}
-.selection-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.selection-label{display:flex;flex-direction:column;gap:4px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
-.selection-label select{border:1px solid var(--line);border-radius:8px;padding:7px 8px;background:#fff;color:var(--ink);font-size:12px;text-transform:none;letter-spacing:0;font-weight:500}
-.selection-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
-.sel-action{border:1px solid var(--line);background:#fff;color:var(--ink-2);padding:8px 6px;border-radius:9px;font-size:11.5px;font-weight:700;cursor:pointer}
-.sel-action.important.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.sel-action.invited.on{background:var(--green);border-color:var(--green);color:#fff}
-.sel-action.wait.on{background:var(--amber);border-color:var(--amber);color:#fff}
-.sel-action.out.on{background:var(--muted);border-color:var(--muted);color:#fff}
-.sel-action.unlock{grid-column:1/-1;background:var(--bg)}
-
-@media (max-width:700px){
-  body{padding-bottom:calc(142px + env(safe-area-inset-bottom))!important}
-  .view{padding-bottom:calc(162px + env(safe-area-inset-bottom))!important}
-  .sidebar{
-    max-height:calc(132px + env(safe-area-inset-bottom))!important;
-    align-items:stretch!important;
-    gap:8px!important;
-    padding:8px 10px calc(8px + env(safe-area-inset-bottom))!important;
-  }
-  .sidebar .nav-group{
-    display:flex!important;
-    flex-direction:column!important;
-    flex:0 0 auto!important;
-    min-width:214px!important;
-    max-width:250px!important;
-    padding:6px!important;
-    margin:0!important;
-    border:1px solid rgba(255,255,255,.08)!important;
-    border-radius:16px!important;
-    background:rgba(255,255,255,.04)!important;
-  }
-  .sidebar .nav-group-home{min-width:122px!important;max-width:122px!important}
-  .sidebar .nav-group-header{
-    display:flex!important;
-    pointer-events:none!important;
-    padding:2px 5px 6px!important;
-    font-size:8.6px!important;
-    letter-spacing:.16em!important;
-    color:#9aa8bf!important;
-    line-height:1!important;
-    min-height:auto!important;
-  }
-  .sidebar .nav-group-header .caret{display:none!important}
-  .sidebar .nav-group-body{
-    display:flex!important;
-    max-height:none!important;
-    overflow-x:auto!important;
-    overflow-y:hidden!important;
-    gap:6px!important;
-    scrollbar-width:none!important;
-  }
-  .sidebar .nav-group-body::-webkit-scrollbar{display:none!important}
-  .sidebar .nav-divider{display:none!important}
-  .nav-btn{
-    flex:0 0 72px!important;
-    width:72px!important;
-    min-height:58px!important;
-    padding:7px 5px!important;
-    font-size:9.6px!important;
-    border-radius:12px!important;
-  }
-  .nav-btn .ico{font-size:15px!important}
-  .nav-btn .badge,.nav-btn .badge-blue{top:2px!important;right:2px!important}
-  #ideasTable{min-width:1280px!important}
-  #listaTable{min-width:1180px!important}
-  #seleccionContainer{overflow:visible!important}
-  #seleccionContainer > div{min-width:0!important}
-  .selection-card{padding:12px;border-radius:14px}
-  .selection-title-row{display:block}
-  .selection-title-row .pill{margin-top:6px}
-  .selection-name{font-size:15px}
-  .selection-controls{grid-template-columns:1fr}
-  .selection-label select{font-size:16px;min-height:42px}
-  .selection-actions{grid-template-columns:1fr 1fr}
-  .sel-action{font-size:12px;min-height:40px}
-}
-
 </style>
 </head>
 <body>
@@ -1052,7 +960,8 @@ table.exec td.actions{text-align:center;width:40px}
   <div class="nav-group nav-group-home">
     <button class="nav-group-header open" onclick="toggleGroup(this)"><span>Inicio</span><span class="caret">▾</span></button>
     <div class="nav-group-body">
-      <button class="nav-btn active" data-view="dashboard" onclick="showView('dashboard')"><span class="ico">⌂</span> Dashboard Ejecutivo</button>
+      <button class="nav-btn active" data-view="dashboard" onclick="showView('dashboard')"><span class="ico">⌂</span> Dashboard</button>
+      <button class="nav-btn" data-view="resumen" onclick="showView('resumen')"><span class="ico">◉</span> Resumen</button>
     </div>
   </div>
 
@@ -1121,8 +1030,8 @@ table.exec td.actions{text-align:center;width:40px}
   <section class="view active" id="view-dashboard">
     <div class="view-header">
       <div>
-        <h2>Dashboard Ejecutivo</h2>
-        <div class="lead">Vista única consolidada: avance general, salud del proyecto, invitados, finanzas, próximos pagos y decisiones pendientes.</div>
+        <h2>Dashboard</h2>
+        <div class="lead">Vista consolidada del estado del matrimonio. Todo el progreso en un solo lugar.</div>
       </div>
       <div class="view-actions">
         <button class="btn ghost" onclick="exportData()">⤓ Respaldar</button>
@@ -1138,25 +1047,6 @@ table.exec td.actions{text-align:center;width:40px}
       <div class="kpi purple"><div class="accent-line"></div><div class="label">Hitos completados</div><div class="value mono" id="kpiHitos">0/0</div><div class="delta" id="kpiHitosDelta">avance del plan</div></div>
       <div class="kpi danger"><div class="accent-line"></div><div class="label">Alertas activas</div><div class="value mono" id="kpiAlertas">0</div><div class="delta" id="kpiAlertasDelta">requieren atención</div></div>
     </div>
-
-    <div class="grid-2b" style="margin-bottom:14px">
-      <div class="panel">
-        <div class="panel-header"><h3>Datos base del matrimonio</h3><span class="hint">consolidado en una sola pestaña</span></div>
-        <div class="data-grid" style="grid-template-columns:1fr 1fr">
-          <div class="data-cell"><div class="k">Novia</div><div class="v" id="dashNovia">Natalia Urrutia Wolfes</div></div>
-          <div class="data-cell"><div class="k">Novio</div><div class="v" id="dashNovio">Antonio Salvo González</div></div>
-          <div class="data-cell"><div class="k">Fecha</div><div class="v lg" id="dashFecha">16 de Abril 2027</div></div>
-          <div class="data-cell"><div class="k">Lugar</div><div class="v" id="dashLugar">Casona Chicureo</div></div>
-          <div class="data-cell"><div class="k">Tipo</div><div class="v" id="dashTipo">Civil + Celebración</div></div>
-          <div class="data-cell"><div class="k">Presupuesto base</div><div class="v lg" id="dashPresupuestoBase">$15.000.000</div></div>
-        </div>
-      </div>
-      <div class="panel">
-        <div class="panel-header"><h3>Salud del proyecto</h3><span class="hint">avance ejecutivo</span></div>
-        <div id="healthBars"></div>
-      </div>
-    </div>
-
 
     <div class="grid-2">
       <div class="stack">
@@ -1191,6 +1081,40 @@ table.exec td.actions{text-align:center;width:40px}
     </div>
   </section>
 
+  <!-- ============================================================ RESUMEN ============================================================ -->
+  <section class="view" id="view-resumen">
+    <div class="view-header">
+      <div>
+        <h2>Resumen del proyecto</h2>
+        <div class="lead">Vista consolidada de todo lo que estamos planeando para el matrimonio.</div>
+      </div>
+    </div>
+
+    <div class="grid-2b" style="margin-bottom:14px">
+      <div class="panel">
+        <div class="panel-header"><h3>Datos del matrimonio</h3></div>
+        <div class="data-grid" style="grid-template-columns:1fr 1fr">
+          <div class="data-cell"><div class="k">Novia</div><div class="v">Natalia Urrutia Wolfes</div></div>
+          <div class="data-cell"><div class="k">Novio</div><div class="v">Antonio Salvo González</div></div>
+          <div class="data-cell"><div class="k">Fecha estimada</div><div class="v lg">Ene–Mar 2027</div></div>
+          <div class="data-cell"><div class="k">Tipo</div><div class="v">Civil + Celebración</div></div>
+          <div class="data-cell"><div class="k">Invitados objetivo</div><div class="v">80–120 personas</div></div>
+          <div class="data-cell"><div class="k">Presupuesto base</div><div class="v lg">$12.000.000 CLP</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><h3>Salud del proyecto</h3></div>
+        <div id="healthBars"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><h3>Progreso general</h3></div>
+      <div id="progressDetail"></div>
+    </div>
+  </section>
+
   <!-- ============================================================ LLUVIA DE IDEAS ============================================================ -->
   <section class="view" id="view-ideas">
     <div class="view-header">
@@ -1215,8 +1139,7 @@ table.exec td.actions{text-align:center;width:40px}
     <div class="panel" style="padding:0;overflow:hidden">
       <table class="exec" id="ideasTable">
         <thead><tr>
-          <th style="width:14%">Nombres</th>
-          <th style="width:14%">Apellidos</th>
+          <th style="width:18%">Nombre</th>
           <th>Vínculo</th>
           <th>De parte de</th>
           <th>Quien Paga</th>
@@ -1265,7 +1188,7 @@ table.exec td.actions{text-align:center;width:40px}
         <option>Sin decidir</option>
         <option>Invitado importante</option>
         <option>Invitado</option>
-        <option>Lista de espera</option>
+        <option>Suplente</option>
         <option>No invitar</option>
       </select></div>
       <div class="group"><label>Cercanía mínima</label><input type="range" id="evalMinScore" min="0" max="10" step="0.5" value="0" oninput="document.getElementById('evalScoreVal').textContent=this.value;renderEvaluacion()"/><div style="font-size:11px;color:var(--muted)">≥ <span id="evalScoreVal">0</span></div></div>
@@ -1324,10 +1247,8 @@ table.exec td.actions{text-align:center;width:40px}
         <div class="group"><label>Decisión</label><select id="seleccionFiltroEstado" onchange="renderSeleccion()">
           <option value="">Todas</option>
           <option value="Sin decidir">Sin decidir</option>
-          <option value="Invitado importante">Importante</option>
-          <option value="Invitado">Invitado</option>
-          <option value="Lista de espera">Lista de espera</option>
-          <option value="No invitar">No invitado</option>
+          <option value="Invitar">Invitar</option>
+          <option value="No invitar">No invitar</option>
           <option value="manual">Manuales</option>
         </select></div>
         <button class="btn ghost reset" onclick="resetSeleccionFilters()">Limpiar</button>
@@ -1358,22 +1279,22 @@ table.exec td.actions{text-align:center;width:40px}
       </div>
     </div>
 
-    <!-- ========== DASHBOARD DE COSTO FINAL ========== -->
-    <div class="kpi-grid k4 lista-cost-kpis" style="margin-bottom:14px">
-      <div class="kpi alt"><div class="accent-line"></div><div class="label">Costo invitados ceremonia</div><div class="value mono" id="listaCostoCeremonia">$0</div><div class="delta" id="listaCostoCeremoniaSub">0 personas × $95.800</div></div>
-      <div class="kpi warn"><div class="accent-line"></div><div class="label">Costo invitados solo fiesta</div><div class="value mono" id="listaCostoFiesta">$0</div><div class="delta" id="listaCostoFiestaSub">0 personas × $36.000</div></div>
-      <div class="kpi danger"><div class="accent-line"></div><div class="label">Costo total invitados</div><div class="value mono" id="listaCostoTotal">$0</div><div class="delta" id="listaCostoTotalSub">Ceremonia + fiesta</div></div>
-      <div class="kpi"><div class="accent-line"></div><div class="label">Lista final</div><div class="value mono" id="listaTotal">0</div><div class="delta" id="listaPersonas">0 personas con +1</div></div>
-    </div>
-
-    <div class="grid-2b" style="margin-bottom:14px">
-      <div class="panel">
-        <div class="panel-header"><h3>Composición del costo final</h3><span class="hint">cortes por tipo de asistencia</span></div>
-        <div id="listaCostoComposicion"></div>
+    <!-- ========== BARRA CONTRACTUAL ========== -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div class="panel" style="padding:12px 14px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);font-weight:600;margin-bottom:4px">Invitados a ceremonia · contractual</div>
+        <div style="display:flex;align-items:baseline;gap:6px;font-family:'IBM Plex Mono',monospace">
+          <span id="listaCeremoniaCount" style="font-size:24px;font-weight:700">0</span>
+          <span style="color:var(--muted);font-size:13px">/ 120 contratado</span>
+        </div>
+        <div id="listaCeremoniaSub" style="font-size:11px;color:var(--muted);margin-top:2px">$95.800 × persona</div>
       </div>
-      <div class="panel">
-        <div class="panel-header"><h3>Financiamiento por quién paga</h3><span class="hint">costo referencial asignado a cada aportante</span></div>
-        <div id="listaFinanciamientoPayer"></div>
+      <div class="panel" style="padding:12px 14px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);font-weight:600;margin-bottom:4px">Costo proyectado banquetería</div>
+        <div style="display:flex;align-items:baseline;gap:6px;font-family:'IBM Plex Mono',monospace">
+          <span id="listaCostoProyectado" style="font-size:24px;font-weight:700">$0</span>
+        </div>
+        <div id="listaCostoDesglose" style="font-size:11px;color:var(--muted);margin-top:2px">Ceremonia + Solo fiesta</div>
       </div>
     </div>
 
@@ -1382,8 +1303,8 @@ table.exec td.actions{text-align:center;width:40px}
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px">
         <div onclick="filtrarListaFinal('all')" id="lkpiTotal" class="lkpi" style="cursor:pointer">
           <div class="lkpi-label">Total invitaciones</div>
-          <div class="lkpi-value mono" id="listaTotalMini">0</div>
-          <div class="lkpi-sub" id="listaPersonasMini">0 personas con +1</div>
+          <div class="lkpi-value mono" id="listaTotal">0</div>
+          <div class="lkpi-sub" id="listaPersonas">0 personas con +1</div>
         </div>
         <div onclick="filtrarListaFinal('confirmado')" id="lkpiConfirm" class="lkpi good" style="cursor:pointer">
           <div class="lkpi-label">Confirmadas</div>
@@ -1464,9 +1385,7 @@ table.exec td.actions{text-align:center;width:40px}
           <th>Nombre</th>
           <th>Vínculo</th>
           <th>De parte</th>
-          <th>Quién paga</th>
           <th>Asistencia</th>
-          <th>Costo ref.</th>
           <th>Tel / Email</th>
           <th>+1</th>
           <th>Estado</th>
@@ -1826,17 +1745,6 @@ table.exec td.actions{text-align:center;width:40px}
     </div>
 
     <div class="grid-2b" style="margin-top:14px">
-      <div class="panel">
-        <div class="panel-header"><h3>Costo referencial de invitados</h3><span class="hint">alimentado por Lista Final</span></div>
-        <div id="finInvitadosCostoReferencial"></div>
-      </div>
-      <div class="panel">
-        <div class="panel-header"><h3>Cruce aportantes vs quién paga</h3><span class="hint">Chato · Astrid · Pamela · Onofre</span></div>
-        <div id="finFinanciamientoInvitados"></div>
-      </div>
-    </div>
-
-    <div class="grid-2b" style="margin-top:14px">
       <div class="panel" style="padding:0;overflow:hidden">
         <div class="panel-header" style="padding:14px 16px;margin:0">
           <div><h3>Ingresos / Aportes</h3><div class="hint" style="margin-top:2px">Carga aquí aportes familiares, ahorros o ingresos comprometidos.</div></div>
@@ -2122,7 +2030,6 @@ const defaultData = {
     lugar: 'Casona Chicureo (Santa Luz de Chicureo)',
     direccionLugar: 'General San Martín 6683, Colina, RM',
     costoPersona: 95800,
-    costoSoloFiesta: 36000,
     minimoInvitados: 120,
     invObjetivo: '80–120',
     presupuesto: 15000000,
@@ -2134,7 +2041,7 @@ const defaultData = {
       'Colegas',
       'Otros'
     ],
-    quienPagaOpciones: ['Novios', 'Chato', 'Astrid', 'Pamela', 'Onofre'],
+    quienPagaOpciones: ['Novios', 'Pamela', 'Arturo', 'Astrid', 'Onofre'],
     criteriosMesas: {
       familiaJunta: true,
       familiaMovible: true,
@@ -8214,7 +8121,6 @@ function normalizeDataStructure(){
   if(!data.config) data.config = {};
   if(!data.config.presupuesto) data.config.presupuesto = 15000000;
   if(typeof data.config.costoPersona === 'undefined') data.config.costoPersona = 95800;
-  if(typeof data.config.costoSoloFiesta === 'undefined') data.config.costoSoloFiesta = 36000;
   if(typeof data.config.minimoInvitados === 'undefined') data.config.minimoInvitados = 120;
   if(!data.config.lugar) data.config.lugar = '';
   if(!data.config.fechaTarget) data.config.fechaTarget = '2027-02-15';
@@ -8232,10 +8138,6 @@ function normalizeDataStructure(){
     // Limpiar campos legacy si todavía existen
     if(typeof g.trae1 !== 'undefined') delete g.trae1;
     if(typeof g.nombre1 !== 'undefined') delete g.nombre1;
-    // Garantizar nombres/apellidos y pagador normalizado
-    ensureGuestNameParts(g);
-    g.quienPaga = normalizePayerName(g.quienPaga);
-
     // Garantizar campo asistencia
     if(!g.asistencia) g.asistencia = 'Ceremonia + fiesta';
 
@@ -8330,7 +8232,6 @@ function calculateGuestScore(g){
 // FLUJO FUNCIONAL DE INVITADOS
 // ============================================================
 const INVITADO_FINAL_DECISIONES = ['Invitado importante', 'Invitado'];
-const DECISION_ESPERA = 'Lista de espera';
 const DECISION_NO_INVITAR = 'No invitar';
 
 function normalizeDecisionLabel(decision){
@@ -8338,8 +8239,7 @@ function normalizeDecisionLabel(decision){
   if(decision === 'No invitado') return DECISION_NO_INVITAR;
   if(decision === 'No invitar') return DECISION_NO_INVITAR;
   if(INVITADO_FINAL_DECISIONES.includes(decision)) return decision;
-  if(decision === 'Suplente') return DECISION_ESPERA;
-  if(decision === 'Lista de espera') return DECISION_ESPERA;
+  if(decision === 'Suplente') return 'Suplente';
   return decision;
 }
 
@@ -8928,17 +8828,6 @@ function renderDashboard(){
   // Próximos pagos
   renderUpcomingPayments();
 
-
-  // Datos base consolidados (antes estaban en Resumen)
-  const setTxt = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val || '—'; };
-  setTxt('dashNovia', data.config.novia);
-  setTxt('dashNovio', data.config.novio);
-  setTxt('dashFecha', data.config.fecha);
-  setTxt('dashLugar', data.config.lugar);
-  setTxt('dashTipo', data.config.tipo);
-  setTxt('dashPresupuestoBase', formatMoney(Number(data.config.presupuesto)||0));
-  try { renderResumen(); } catch(e){}
-
   updateNavBadges();
 }
 
@@ -9080,8 +8969,7 @@ function renderResumen(){
     {label:'Presupuesto usado', val:presPct, color: presPct > 90 ? 'dg' : presPct > 70 ? 'wn' : 'gd'}
   ];
 
-  const hb = document.getElementById('healthBars');
-  if(hb) hb.innerHTML = bars.map(b => `
+  document.getElementById('healthBars').innerHTML = bars.map(b => `
     <div class="bar-row">
       <div class="label">${b.label}</div>
       <div class="track"><div class="fill ${b.color}" style="width:${b.val}%"></div></div>
@@ -9090,8 +8978,7 @@ function renderResumen(){
   `).join('');
 
   // Detalle progreso
-  const pd = document.getElementById('progressDetail');
-  if(pd) pd.innerHTML = `
+  document.getElementById('progressDetail').innerHTML = `
     <div class="data-grid" style="grid-template-columns:repeat(4,1fr)">
       <div class="data-cell"><div class="k">Personas en lluvia ideas</div><div class="v lg">${totalIdeas}</div><div class="sub">objetivo: 120-150</div></div>
       <div class="data-cell"><div class="k">Lista final actual</div><div class="v lg">${getListaFinal().length}</div><div class="sub">objetivo: 80-120</div></div>
@@ -9128,8 +9015,6 @@ function fillVinculoSelects(){
 function addGuest(){
   const newG = {
     id: Date.now() + Math.random(),
-    nombres: '',
-    apellidos: '',
     nombre: '',
     vinculo: 'Otros',
     departe: 'Ambos',
@@ -9159,7 +9044,7 @@ function addGuest(){
   saveData();
   renderIdeas();
   setTimeout(()=>{
-    const inp = document.querySelector(`#ideasTbody tr[data-id="${newG.id}"] input[data-field="nombres"]`);
+    const inp = document.querySelector(`#ideasTbody tr[data-id="${newG.id}"] input[data-field="nombre"]`);
     if(inp) inp.focus();
   }, 50);
 }
@@ -9182,19 +9067,6 @@ function updateGuest(id, field, value){
     g[obj][sub] = value;
   } else {
     g[field] = value;
-  }
-
-  // Si actualiza nombres/apellidos, mantener nombre completo sincronizado
-  if(field === 'nombres' || field === 'apellidos'){
-    g.nombre = `${g.nombres || ''} ${g.apellidos || ''}`.trim();
-  }
-  if(field === 'nombre'){
-    const sp = splitGuestName(value);
-    g.nombres = sp.nombres;
-    g.apellidos = sp.apellidos;
-  }
-  if(field === 'quienPaga'){
-    g.quienPaga = normalizePayerName(value);
   }
 
   // Si actualiza vínculo, propagar al acompañante (misma categoría)
@@ -9226,7 +9098,7 @@ function renderIdeasTable(){
   const fI = document.getElementById('filterImportancia')?.value || '';
 
   let list = data.guests;
-  if(search) list = list.filter(g => getGuestDisplayName(g).toLowerCase().includes(search));
+  if(search) list = list.filter(g => (g.nombre||'').toLowerCase().includes(search));
   if(fV) list = list.filter(g => g.vinculo === fV);
   if(fP) list = list.filter(g => g.departe === fP);
   if(fI) list = list.filter(g => g.importancia === fI);
@@ -9239,10 +9111,8 @@ function renderIdeasTable(){
     const sug = sugerencia(score);
     
     // FILA PRINCIPAL del invitado
-    ensureGuestNameParts(g);
     rows.push(`<tr data-id="${g.id}" data-tipo="principal">
-      <td><input type="text" data-field="nombres" value="${escapeHtml(g.nombres || '')}" placeholder="Nombres" oninput="updateGuestNamePart(${g.id},'nombres',this.value);renderIdeasTableRowScore(${g.id})"/></td>
-      <td><input type="text" data-field="apellidos" value="${escapeHtml(g.apellidos || '')}" placeholder="Apellidos" oninput="updateGuestNamePart(${g.id},'apellidos',this.value);renderIdeasTableRowScore(${g.id})"/></td>
+      <td><input type="text" data-field="nombre" value="${escapeHtml(g.nombre)}" placeholder="Nombre" oninput="updateGuest(${g.id},'nombre',this.value);renderIdeasTableRowScore(${g.id})"/></td>
       <td><select data-field="vinculo" data-vinculos onchange="updateGuest(${g.id},'vinculo',this.value);renderIdeasTableRowScore(${g.id});renderIdeasTable()">${opts.replace(`<option>${g.vinculo||''}</option>`, `<option selected>${g.vinculo||''}</option>`)}</select></td>
       <td><select data-field="departe" onchange="updateGuest(${g.id},'departe',this.value)">
         <option ${g.departe==='Natalia'?'selected':''}>Natalia</option>
@@ -9250,7 +9120,11 @@ function renderIdeasTable(){
         <option ${g.departe==='Ambos'?'selected':''}>Ambos</option>
       </select></td>
       <td><select data-field="quienPaga" onchange="updateGuest(${g.id},'quienPaga',this.value);renderIdeasTable()" style="font-size:11px;padding:3px">
-        ${payerSelectOptions(g.quienPaga)}
+        <option ${(g.quienPaga||'Novios')==='Novios'?'selected':''}>Novios</option>
+        <option ${g.quienPaga==='Pamela'?'selected':''}>Pamela</option>
+        <option ${g.quienPaga==='Arturo'?'selected':''}>Arturo</option>
+        <option ${g.quienPaga==='Astrid'?'selected':''}>Astrid</option>
+        <option ${g.quienPaga==='Onofre'?'selected':''}>Onofre</option>
       </select></td>
       <td><select data-field="frecuencia" onchange="updateGuest(${g.id},'frecuencia',this.value);renderIdeasTableRowScore(${g.id})">
         <option ${g.frecuencia==='Muy frecuente'?'selected':''}>Muy frecuente</option>
@@ -9283,14 +9157,13 @@ function renderIdeasTable(){
         <td style="padding-left:30px">
           <div style="display:flex;align-items:center;gap:6px">
             <span style="color:var(--accent);font-size:14px">↳</span>
-            <input type="text" value="${escapeHtml((g.acompanante && g.acompanante.nombre) || '')}" placeholder="Nombre acompañante" oninput="updateGuest(${g.id},'acompanante.nombre',this.value)" style="flex:1;font-size:12px"/>
+            <input type="text" value="${escapeHtml((g.acompanante && g.acompanante.nombre) || '')}" placeholder="Nombre del acompañante" oninput="updateGuest(${g.id},'acompanante.nombre',this.value)" style="flex:1;font-size:12px"/>
           </div>
         </td>
-        <td><span style="font-size:11px;color:var(--muted);font-style:italic">Acompañante</span></td>
         <td><span style="font-size:11px;color:var(--muted);font-style:italic">${escapeHtml(g.vinculo)}</span> <span style="font-size:10px;color:var(--accent)">(↑ misma)</span></td>
         <td><span style="font-size:11px;color:var(--muted);font-style:italic">${escapeHtml(g.departe)}</span></td>
         <td><span style="font-size:11px;color:var(--muted);font-style:italic">${escapeHtml(g.quienPaga||'Novios')}</span></td>
-        <td colspan="2" style="font-size:11px;color:var(--muted);font-style:italic">Acompañante de ${escapeHtml(getGuestDisplayName(g))}</td>
+        <td colspan="2" style="font-size:11px;color:var(--muted);font-style:italic">Acompañante de ${escapeHtml(g.nombre)}</td>
         <td style="text-align:center;font-size:10px;color:var(--accent);font-weight:600">+1</td>
         <td colspan="2" style="font-size:11px;color:var(--muted);font-style:italic">Vinculado al principal</td>
         <td class="actions"><button class="icon-btn" onclick="toggleAcompanante(${g.id},false)" title="Quitar acompañante">×</button></td>
@@ -9298,7 +9171,7 @@ function renderIdeasTable(){
     }
   });
 
-  document.getElementById('ideasTbody').innerHTML = rows.join('') || `<tr><td colspan="11"><div class="empty"><div class="title">Sin invitados todavía</div><div class="desc">Click en "+ Agregar persona" para empezar</div></div></td></tr>`;
+  document.getElementById('ideasTbody').innerHTML = rows.join('') || `<tr><td colspan="10"><div class="empty"><div class="title">Sin invitados todavía</div><div class="desc">Click en "+ Agregar persona" para empezar</div></div></td></tr>`;
   
   // Actualizar contador en sidebar
   updateNavBadges();
@@ -9338,189 +9211,6 @@ function resetIdeasFilters(){
 
 function escapeHtml(s){
   return (s||'').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-
-// ============================================================
-// HELPERS · NOMBRES, COSTOS Y FINANCIAMIENTO DE INVITADOS
-// ============================================================
-function splitGuestName(fullName){
-  const clean = (fullName || '').toString().trim().replace(/\s+/g,' ');
-  if(!clean) return {nombres:'', apellidos:''};
-  const parts = clean.split(' ');
-  if(parts.length <= 2) return {nombres: parts[0] || '', apellidos: parts.slice(1).join(' ')};
-  return {nombres: parts.slice(0, Math.max(1, parts.length - 2)).join(' '), apellidos: parts.slice(Math.max(1, parts.length - 2)).join(' ')};
-}
-
-function ensureGuestNameParts(g){
-  if(!g) return {nombres:'', apellidos:''};
-  if((!g.nombres && !g.apellidos) && g.nombre){
-    const sp = splitGuestName(g.nombre);
-    g.nombres = sp.nombres;
-    g.apellidos = sp.apellidos;
-  }
-  if((g.nombres || g.apellidos) && (!g.nombre || g.nombre.trim() !== `${g.nombres || ''} ${g.apellidos || ''}`.trim())){
-    g.nombre = `${g.nombres || ''} ${g.apellidos || ''}`.trim();
-  }
-  return {nombres:g.nombres || '', apellidos:g.apellidos || ''};
-}
-
-function getGuestDisplayName(g){
-  ensureGuestNameParts(g);
-  return (g && (g.nombre || `${g.nombres || ''} ${g.apellidos || ''}`.trim())) || '';
-}
-
-function updateGuestNamePart(id, field, value){
-  const g = data.guests.find(x => x.id === id);
-  if(!g) return;
-  g[field] = value;
-  g.nombre = `${g.nombres || ''} ${g.apellidos || ''}`.trim();
-  saveData();
-}
-
-function normalizePayerName(name){
-  const v = (name || 'Novios').toString().trim();
-  if(!v) return 'Novios';
-  if(v.toLowerCase() === 'arturo') return 'Chato';
-  return v;
-}
-
-function getPayerOptions(){
-  const base = ['Novios','Chato','Astrid','Pamela','Onofre'];
-  const extras = new Set();
-  (data.guests || []).forEach(g => {
-    const v = normalizePayerName(g.quienPaga);
-    if(v && !base.includes(v)) extras.add(v);
-  });
-  (data.ingresos || []).forEach(i => {
-    const v = normalizePayerName(i.fuente);
-    if(v && !base.includes(v) && !['Nuevo ingreso','Aporte familiar','Ingreso'].includes(v)) extras.add(v);
-  });
-  return [...base, ...extras];
-}
-
-function payerSelectOptions(current){
-  const cur = normalizePayerName(current || 'Novios');
-  const opts = getPayerOptions();
-  if(cur && !opts.includes(cur)) opts.push(cur);
-  return opts.map(o => `<option value="${escapeHtml(o)}" ${cur===o?'selected':''}>${escapeHtml(o)}</option>`).join('');
-}
-
-function getCostConfig(){
-  return {
-    ceremonia: Number(data.config && data.config.costoPersona) || 95800,
-    fiesta: Number(data.config && data.config.costoSoloFiesta) || 36000
-  };
-}
-
-function getGuestUnitCost(g){
-  const c = getCostConfig();
-  return ((g && g.asistencia) === 'Solo fiesta') ? c.fiesta : c.ceremonia;
-}
-
-function getGuestCost(g){
-  return getGuestHeadcount(g) * getGuestUnitCost(g);
-}
-
-function getFinalGuestCostSummary(){
-  const final = getListaFinal();
-  const cfg = getCostConfig();
-  const ceremoniaGuests = final.filter(g => (g.asistencia || 'Ceremonia + fiesta') === 'Ceremonia + fiesta');
-  const fiestaGuests = final.filter(g => g.asistencia === 'Solo fiesta');
-  const ceremoniaHeads = ceremoniaGuests.reduce((s,g)=>s+getGuestHeadcount(g),0);
-  const fiestaHeads = fiestaGuests.reduce((s,g)=>s+getGuestHeadcount(g),0);
-  const costoCeremonia = ceremoniaHeads * cfg.ceremonia;
-  const costoFiesta = fiestaHeads * cfg.fiesta;
-  return {
-    final,
-    ceremoniaGuests,
-    fiestaGuests,
-    ceremoniaHeads,
-    fiestaHeads,
-    costoCeremonia,
-    costoFiesta,
-    total: costoCeremonia + costoFiesta,
-    cfg
-  };
-}
-
-function getGuestCostByPayer(){
-  const summary = getFinalGuestCostSummary();
-  const byPayer = {};
-  getPayerOptions().forEach(p => byPayer[p] = {payer:p, guests:0, heads:0, costo:0, ceremoniaHeads:0, fiestaHeads:0});
-  summary.final.forEach(g => {
-    const payer = normalizePayerName(g.quienPaga);
-    if(!byPayer[payer]) byPayer[payer] = {payer, guests:0, heads:0, costo:0, ceremoniaHeads:0, fiestaHeads:0};
-    const heads = getGuestHeadcount(g);
-    byPayer[payer].guests += 1;
-    byPayer[payer].heads += heads;
-    byPayer[payer].costo += getGuestCost(g);
-    if((g.asistencia || 'Ceremonia + fiesta') === 'Ceremonia + fiesta') byPayer[payer].ceremoniaHeads += heads;
-    else byPayer[payer].fiestaHeads += heads;
-  });
-  return Object.values(byPayer).filter(x => x.guests || x.costo || ['Chato','Astrid','Pamela','Onofre'].includes(x.payer));
-}
-
-function getIngresosByPayer(){
-  const by = {};
-  getPayerOptions().forEach(p => by[p] = {payer:p, comprometido:0, recibido:0, items:0});
-  (data.ingresos || []).forEach(i => {
-    const payer = normalizePayerName(i.fuente);
-    if(!by[payer]) by[payer] = {payer, comprometido:0, recibido:0, items:0};
-    const monto = Number(i.monto) || 0;
-    by[payer].comprometido += monto;
-    if(isIngresoRecibido(i)) by[payer].recibido += monto;
-    by[payer].items += 1;
-  });
-  return by;
-}
-
-function renderGuestCostComposition(targetId){
-  const el = document.getElementById(targetId);
-  if(!el) return;
-  const s = getFinalGuestCostSummary();
-  const max = Math.max(s.costoCeremonia, s.costoFiesta, 1);
-  el.innerHTML = `
-    <div class="bar-row" style="grid-template-columns:128px 1fr 112px">
-      <div class="label">Ceremonia</div>
-      <div class="track"><div class="fill bl" style="width:${s.costoCeremonia/max*100}%"></div></div>
-      <div class="num">${formatMoney(s.costoCeremonia)}</div>
-    </div>
-    <div style="font-size:11px;color:var(--muted);margin:-2px 0 8px 0">${s.ceremoniaHeads} personas × ${formatMoney(s.cfg.ceremonia)}</div>
-    <div class="bar-row" style="grid-template-columns:128px 1fr 112px">
-      <div class="label">Solo fiesta</div>
-      <div class="track"><div class="fill acc" style="width:${s.costoFiesta/max*100}%"></div></div>
-      <div class="num">${formatMoney(s.costoFiesta)}</div>
-    </div>
-    <div style="font-size:11px;color:var(--muted);margin:-2px 0 8px 0">${s.fiestaHeads} personas × ${formatMoney(s.cfg.fiesta)}</div>
-    <div style="margin-top:10px;padding:10px;border-radius:8px;background:var(--bg);display:flex;justify-content:space-between;gap:8px">
-      <strong>Total referencial</strong><strong class="mono">${formatMoney(s.total)}</strong>
-    </div>`;
-}
-
-function renderPayerFunding(targetId, includeIngresos){
-  const el = document.getElementById(targetId);
-  if(!el) return;
-  const costs = getGuestCostByPayer();
-  const ingresos = getIngresosByPayer();
-  const max = Math.max(...costs.map(x=>Math.max(x.costo, ingresos[x.payer]?.comprometido || 0)), 1);
-  el.innerHTML = costs.map(x => {
-    const ing = ingresos[x.payer] || {comprometido:0, recibido:0};
-    const brecha = (ing.comprometido || 0) - (x.costo || 0);
-    return `<div style="padding:10px 0;border-bottom:1px solid var(--line-2)">
-      <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline">
-        <strong>${escapeHtml(x.payer)}</strong>
-        <span class="mono" style="font-weight:700">${formatMoney(x.costo)}</span>
-      </div>
-      <div style="font-size:11px;color:var(--muted);margin:2px 0 6px">${x.guests} invitaciones · ${x.heads} personas · ⛪ ${x.ceremoniaHeads} · 🎉 ${x.fiestaHeads}</div>
-      <div class="track" style="height:7px"><div class="fill acc" style="width:${x.costo/max*100}%"></div></div>
-      ${includeIngresos ? `<div style="font-size:11px;color:var(--muted);margin-top:6px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
-        <span>Ingreso comprometido: <strong>${formatMoney(ing.comprometido || 0)}</strong></span>
-        <span>Recibido: <strong style="color:var(--green)">${formatMoney(ing.recibido || 0)}</strong></span>
-        <span style="grid-column:1/-1;color:${brecha<0?'var(--red)':'var(--green)'}">${brecha<0?'Brecha por cubrir':'Holgura'}: <strong>${formatMoney(Math.abs(brecha))}</strong></span>
-      </div>` : ''}
-    </div>`;
-  }).join('') || '<div class="empty"><div class="desc">Sin invitados seleccionados.</div></div>';
 }
 
 // ============================================================
@@ -9564,7 +9254,7 @@ function renderEvaluacion(){
         <option ${(!g.decision||g.decision==='Sin decidir')?'selected':''}>Sin decidir</option>
         <option ${g.decision==='Invitado importante'?'selected':''}>Invitado importante</option>
         <option ${g.decision==='Invitado'?'selected':''}>Invitado</option>
-        <option ${normalizeDecisionLabel(g.decision)===DECISION_ESPERA?'selected':''}>Lista de espera</option>
+        <option ${g.decision==='Suplente'?'selected':''}>Suplente</option>
         <option ${normalizeDecisionLabel(g.decision)===DECISION_NO_INVITAR?'selected':''}>No invitar</option>
       </select></td>
     </tr>`;
@@ -9759,7 +9449,7 @@ function renderLista(){
   let list = [...all];
 
   // Filtros básicos
-  if(search) list = list.filter(g => getGuestDisplayName(g).toLowerCase().includes(search));
+  if(search) list = list.filter(g => (g.nombre||'').toLowerCase().includes(search));
   if(vinc) list = list.filter(g => g.vinculo === vinc);
   if(mesa) list = list.filter(g => (g.mesa||'') === mesa);
   if(departe) list = list.filter(g => g.departe === departe);
@@ -9793,35 +9483,32 @@ function renderLista(){
 
   // === COSTOS REALES POR ASISTENCIA ===
   // Cabezas (incluyendo acompañantes) por tipo de asistencia
-  const costSummary = getFinalGuestCostSummary();
-  const ceremoniaCabezas = costSummary.ceremoniaHeads;
-  const soloFiestaCabezas = costSummary.fiestaHeads;
-  const COSTO_CEREMONIA = costSummary.cfg.ceremonia;
-  const COSTO_SOLO_FIESTA = costSummary.cfg.fiesta;
-  const costoCeremoniaTotal = costSummary.costoCeremonia;
-  const costoSoloFiestaTotal = costSummary.costoFiesta;
-  const costoProyectadoTotal = costSummary.total;
+  const ceremoniaCabezas = all
+    .filter(g => (g.asistencia || 'Ceremonia + fiesta') === 'Ceremonia + fiesta')
+    .reduce((s,g) => s + 1 + ((g.acompanante && g.acompanante.trae) ? 1 : 0), 0);
+  const soloFiestaCabezas = all
+    .filter(g => g.asistencia === 'Solo fiesta')
+    .reduce((s,g) => s + 1 + ((g.acompanante && g.acompanante.trae) ? 1 : 0), 0);
+  const COSTO_CEREMONIA = 95800;
+  const COSTO_SOLO_FIESTA = 36000;
+  const costoCeremoniaTotal = ceremoniaCabezas * COSTO_CEREMONIA;
+  const costoSoloFiestaTotal = soloFiestaCabezas * COSTO_SOLO_FIESTA;
+  const costoProyectadoTotal = costoCeremoniaTotal + costoSoloFiestaTotal;
 
-  // Dashboard costo final
-  if($('listaCostoCeremonia')) $('listaCostoCeremonia').textContent = formatMoney(costoCeremoniaTotal);
-  if($('listaCostoFiesta')) $('listaCostoFiesta').textContent = formatMoney(costoSoloFiestaTotal);
-  if($('listaCostoTotal')) $('listaCostoTotal').textContent = formatMoney(costoProyectadoTotal);
-  if($('listaCostoCeremoniaSub')) $('listaCostoCeremoniaSub').textContent = `${ceremoniaCabezas} personas × ${formatMoney(COSTO_CEREMONIA)}`;
-  if($('listaCostoFiestaSub')) $('listaCostoFiestaSub').textContent = `${soloFiestaCabezas} personas × ${formatMoney(COSTO_SOLO_FIESTA)}`;
-  if($('listaCostoTotalSub')) $('listaCostoTotalSub').textContent = `${formatMoney(costoCeremoniaTotal)} ceremonia + ${formatMoney(costoSoloFiestaTotal)} fiesta`;
-  renderGuestCostComposition('listaCostoComposicion');
-  renderPayerFunding('listaFinanciamientoPayer', false);
-
-  // Compatibilidad con IDs legacy si existen
+  // Render barras contractuales
   if($('listaCeremoniaCount')) $('listaCeremoniaCount').textContent = ceremoniaCabezas;
   if($('listaCeremoniaSub')) $('listaCeremoniaSub').textContent = `${formatMoney(COSTO_CEREMONIA)} × persona = ${formatMoney(costoCeremoniaTotal)}`;
   if($('listaCostoProyectado')) $('listaCostoProyectado').textContent = formatMoney(costoProyectadoTotal);
-  if($('listaCostoDesglose')) $('listaCostoDesglose').textContent = `${ceremoniaCabezas}×${formatMoney(COSTO_CEREMONIA)} + ${soloFiestaCabezas}×${formatMoney(COSTO_SOLO_FIESTA)}`;
+  if($('listaCostoDesglose')){
+    if(soloFiestaCabezas > 0){
+      $('listaCostoDesglose').textContent = `${ceremoniaCabezas}×${formatMoney(COSTO_CEREMONIA)} + ${soloFiestaCabezas}×${formatMoney(COSTO_SOLO_FIESTA)}`;
+    } else {
+      $('listaCostoDesglose').textContent = `${ceremoniaCabezas} personas × ${formatMoney(COSTO_CEREMONIA)}`;
+    }
+  }
 
   if($('listaTotal')) $('listaTotal').textContent = total;
   if($('listaPersonas')) $('listaPersonas').textContent = personas + ' personas con +1';
-  if($('listaTotalMini')) $('listaTotalMini').textContent = total;
-  if($('listaPersonasMini')) $('listaPersonasMini').textContent = personas + ' personas con +1';
   if($('listaConfirm')) $('listaConfirm').textContent = conf;
   if($('listaConfirmPct')) $('listaConfirmPct').textContent = total > 0 ? Math.round(conf/total*100) + '%' : '0%';
   if($('listaPendientes')) $('listaPendientes').textContent = pend;
@@ -9926,12 +9613,10 @@ function renderLista(){
   const tableHtml = list.map(g => {
     const asist = g.asistencia || 'Ceremonia + fiesta';
     return `<tr data-id="${g.id}">
-      <td><span class="name">${escapeHtml(getGuestDisplayName(g))}</span><div class="role">${normalizeDecisionLabel(g.decision)||''}</div></td>
+      <td><span class="name">${escapeHtml(g.nombre)}</span><div class="role">${g.decision||''}</div></td>
       <td>${escapeHtml(g.vinculo)||'—'}</td>
       <td>${escapeHtml(g.departe)||'—'}</td>
-      <td><span class="pill accent">${escapeHtml(normalizePayerName(g.quienPaga))}</span></td>
       <td><span style="font-size:11px;color:${asist==='Ceremonia + fiesta'?'#1f5fa8':'#b4894e'};font-weight:600">${asist==='Ceremonia + fiesta'?'⛪ Ceremonia':'🎉 Solo fiesta'}</span></td>
-      <td class="num mono">${formatMoney(getGuestCost(g))}</td>
       <td>
         <input type="text" value="${escapeHtml(g.tel||'')}" placeholder="Tel" onchange="updateGuest(${g.id},'tel',this.value)" style="width:90px;font-size:11.5px"/>
         <input type="text" value="${escapeHtml(g.email||'')}" placeholder="Email" onchange="updateGuest(${g.id},'email',this.value)" style="font-size:11.5px;margin-top:2px"/>
@@ -9951,7 +9636,7 @@ function renderLista(){
     </tr>`;
   }).join('');
 
-  if($('listaTbody')) $('listaTbody').innerHTML = tableHtml || `<tr><td colspan="12"><div class="empty"><div class="title">Sin invitados en la lista final</div><div class="desc">Marca personas como "Invitado" en la Herramienta de Selección</div></div></td></tr>`;
+  if($('listaTbody')) $('listaTbody').innerHTML = tableHtml || `<tr><td colspan="10"><div class="empty"><div class="title">Sin invitados en la lista final</div><div class="desc">Marca personas como "Invitado" en la Herramienta de Selección</div></div></td></tr>`;
 
   // Guardar la lista filtrada actual para que exportListaCSV(true) la use
   _listaFiltradaActual = list;
@@ -10019,15 +9704,13 @@ function renderSeleccion(){
   list = list.map(g => ({...g, _score: calcCercania(g), _rawScore: calculateGuestScore(g)}));
   
   // Aplicar filtros
-  if(search) list = list.filter(g => getGuestDisplayName(g).toLowerCase().includes(search));
+  if(search) list = list.filter(g => (g.nombre||'').toLowerCase().includes(search));
   if(fVinc) list = list.filter(g => g.vinculo === fVinc);
   if(fDeparte) list = list.filter(g => g.departe === fDeparte);
   if(fImp) list = list.filter(g => g.importancia === fImp);
   
-  if(fEstado === 'Sin decidir') list = list.filter(g => !g.decision || normalizeDecisionLabel(g.decision) === 'Sin decidir');
-  else if(fEstado === 'Invitado importante') list = list.filter(g => normalizeDecisionLabel(g.decision) === 'Invitado importante');
-  else if(fEstado === 'Invitado') list = list.filter(g => normalizeDecisionLabel(g.decision) === 'Invitado');
-  else if(fEstado === 'Lista de espera') list = list.filter(g => normalizeDecisionLabel(g.decision) === DECISION_ESPERA);
+  if(fEstado === 'Sin decidir') list = list.filter(g => !g.decision || g.decision === 'Sin decidir');
+  else if(fEstado === 'Invitar') list = list.filter(isGuestSelected);
   else if(fEstado === 'No invitar') list = list.filter(g => normalizeDecisionLabel(g.decision) === DECISION_NO_INVITAR);
   else if(fEstado === 'manual') list = list.filter(g => g.decisionManual);
   
@@ -10046,8 +9729,7 @@ function renderSeleccion(){
   const total = data.guests.length;
   const si = getListaFinal().length;
   const no = data.guests.filter(g => normalizeDecisionLabel(g.decision) === DECISION_NO_INVITAR).length;
-  const espera = data.guests.filter(g => normalizeDecisionLabel(g.decision) === DECISION_ESPERA).length;
-  const pend = total - si - no - espera;
+  const pend = total - si - no;
   const target = Math.round(total * 0.75);
   const faltan = Math.max(0, target - si);
   
@@ -10069,8 +9751,7 @@ function renderSeleccion(){
       const guestsCat = data.guests.filter(g => g.vinculo === cat);
       const siCat = guestsCat.filter(isGuestSelected).length;
       const noCat = guestsCat.filter(g => normalizeDecisionLabel(g.decision) === DECISION_NO_INVITAR).length;
-      const esperaCat = guestsCat.filter(g => normalizeDecisionLabel(g.decision) === DECISION_ESPERA).length;
-      const pendCat = guestsCat.length - siCat - noCat - esperaCat;
+      const pendCat = guestsCat.length - siCat - noCat;
       const pctSi = guestsCat.length > 0 ? Math.round(siCat/guestsCat.length*100) : 0;
       
       distHtml += `
@@ -10086,7 +9767,6 @@ function renderSeleccion(){
           </div>
           <div style="font-size:10px;color:var(--muted);margin-top:4px;display:flex;gap:6px">
             <span style="color:var(--green)">✓ ${siCat}</span>
-            <span style="color:var(--amber)">⌛ ${esperaCat}</span>
             <span style="color:var(--red)">✕ ${noCat}</span>
             <span>⏳ ${pendCat}</span>
           </div>
@@ -10097,81 +9777,75 @@ function renderSeleccion(){
     distContainer.innerHTML = distHtml;
   }
   
-  // === RENDERIZAR LISTA EN TARJETAS EJECUTIVAS ===
-  // La decisión manual es la fuente de verdad para Lista Final.
-  const decisionPill = (decision) => {
-    const d = normalizeDecisionLabel(decision);
-    if(d === 'Invitado importante') return '<span class="pill accent">Importante</span>';
-    if(d === 'Invitado') return '<span class="pill green">Invitado</span>';
-    if(d === DECISION_ESPERA) return '<span class="pill amber">Lista espera</span>';
-    if(d === DECISION_NO_INVITAR) return '<span class="pill gray">No invitado</span>';
-    return '<span class="pill blue">Sin decidir</span>';
-  };
-
-  let listHtml = '<div class="selection-list">';
+  // === RENDERIZAR LISTA COMPACTA (formato inbox) ===
+  // Una fila por persona, ordenada por score descendente.
+  // Cada fila: nombre · categoría · sugerencia · 4 botones de acción
+  let listHtml = `
+    <div style="display:flex;align-items:center;padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--line);font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);font-weight:600">
+      <div style="flex:1.4">Invitado</div>
+      <div style="width:120px">Categoría</div>
+      <div style="width:90px;text-align:center">Score</div>
+      <div style="width:140px;text-align:center">Asistencia</div>
+      <div style="width:230px;text-align:center">Decisión</div>
+    </div>
+  `;
 
   if(list.length === 0){
     listHtml += '<div style="padding:30px;text-align:center;color:var(--muted)">Sin invitados que mostrar</div>';
   } else {
-    list.forEach((g) => {
-      ensureGuestNameParts(g);
+    list.forEach((g, idx) => {
       const decisionActual = normalizeDecisionLabel(g.decision);
+      const esInvitadoImp = decisionActual === 'Invitado importante';
+      const esInvitado = decisionActual === 'Invitado';
+      const esNoInvitar = normalizeDecisionLabel(decisionActual) === DECISION_NO_INVITAR;
       const manual = g.decisionManual;
+
+      // Sugerencia automática referencial sobre el ranking global.
       const sugerido = g.importancia === 'Imprescindible'
-        ? 'Importante'
-        : (rankedIdsSugeridos.has(g.id) ? 'Invitado' : 'Revisar');
+        ? 'Imprescindible'
+        : (rankedIdsSugeridos.has(g.id) ? 'Invitar' : 'Revisar');
+      const sugColor = sugerido === 'Imprescindible' ? '#b3322c' : sugerido === 'Invitar' ? '#1f8a5b' : '#6b7484';
+
       const asistencia = g.asistencia || 'Ceremonia + fiesta';
-      const costo = getGuestCost(g);
-      const payer = normalizePayerName(g.quienPaga);
-      const cardClass = decisionActual === 'Invitado importante' ? 'important' : decisionActual === 'Invitado' ? 'selected' : decisionActual === DECISION_ESPERA ? 'wait' : decisionActual === DECISION_NO_INVITAR ? 'out' : '';
-      const scoreClass = g._score>=8?'red':g._score>=6?'accent':g._score>=4?'amber':'gray';
+      const filaBg = esInvitadoImp ? 'var(--accent-soft)' : esInvitado ? 'var(--green-soft)' : esNoInvitar ? 'rgba(179,50,44,0.04)' : '#fff';
+      const filaBorder = esInvitadoImp ? 'var(--accent)' : esInvitado ? 'var(--green)' : esNoInvitar ? 'rgba(179,50,44,0.3)' : 'var(--line)';
 
       listHtml += `
-        <div class="selection-card ${cardClass}">
-          <div class="selection-card-main">
-            <div class="selection-title-row">
-              <div class="selection-name">${escapeHtml(getGuestDisplayName(g) || 'Sin nombre')}</div>
-              ${decisionPill(decisionActual)}
+        <div style="display:flex;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);background:${filaBg};border-left:3px solid ${filaBorder};transition:background .1s">
+          <div style="flex:1.4;min-width:0">
+            <div style="font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+              ${escapeHtml(g.nombre || 'Sin nombre')}
+              ${(g.acompanante && g.acompanante.trae) ? '<span style="color:var(--accent);font-size:10px;background:var(--accent-soft);padding:1px 5px;border-radius:8px">+1</span>' : ''}
+              ${manual ? '<span title="Decisión manual" style="color:var(--accent);font-size:11px">🔒</span>' : ''}
             </div>
-            <div class="selection-meta">
-              <span>${escapeHtml(g.vinculo || '-')}</span>
-              <span>${escapeHtml(g.departe || '-')}</span>
-              <span>Quién paga: <strong>${escapeHtml(payer)}</strong></span>
-              ${(g.acompanante && g.acompanante.trae) ? '<span>+1</span>' : ''}
-              ${manual ? '<span>🔒 Manual</span>' : ''}
-            </div>
-            <div class="selection-score-row">
-              <span class="pill ${scoreClass}">Score ${g._score.toFixed(1)}</span>
-              <span class="pill gray">Sugerencia: ${escapeHtml(sugerido)}</span>
-              <span class="pill blue">Costo ref. ${formatMoney(costo)}</span>
-            </div>
+            <div style="font-size:11px;color:var(--muted);margin-top:1px">${escapeHtml(g.departe || '-')} · ${escapeHtml(g.importancia || '-')}</div>
           </div>
-          <div class="selection-controls">
-            <label class="selection-label">Participación
-              <select onchange="updateGuest(${g.id},'asistencia',this.value);renderSeleccion()">
-                <option ${asistencia==='Ceremonia + fiesta'?'selected':''}>Ceremonia + fiesta</option>
-                <option ${asistencia==='Solo fiesta'?'selected':''}>Solo fiesta</option>
-              </select>
-            </label>
-            <label class="selection-label">Quién paga
-              <select onchange="updateGuest(${g.id},'quienPaga',this.value);renderSeleccion()">
-                ${payerSelectOptions(g.quienPaga)}
-              </select>
-            </label>
+          <div style="width:120px;font-size:11px;color:var(--muted)">${escapeHtml(g.vinculo || '-')}</div>
+          <div style="width:90px;text-align:center">
+            <span class="pill ${g._score>=8?'red':g._score>=6?'accent':g._score>=4?'amber':'gray'}" style="font-size:10px">${g._score.toFixed(1)}</span>
+            <div style="font-size:9px;color:${sugColor};font-weight:600;margin-top:2px">→ ${sugerido}</div>
           </div>
-          <div class="selection-actions">
-            <button class="sel-action important ${decisionActual==='Invitado importante'?'on':''}" onclick="setDecision(${g.id},'Invitado importante')">⭐ Importante</button>
-            <button class="sel-action invited ${decisionActual==='Invitado'?'on':''}" onclick="setDecision(${g.id},'Invitado')">✓ Invitado</button>
-            <button class="sel-action wait ${decisionActual===DECISION_ESPERA?'on':''}" onclick="setDecision(${g.id},'Lista de espera')">⌛ Lista espera</button>
-            <button class="sel-action out ${decisionActual===DECISION_NO_INVITAR?'on':''}" onclick="setDecision(${g.id},'No invitar')">✕ No invitado</button>
-            ${manual ? `<button class="sel-action unlock" onclick="liberarDecisionManual(${g.id})">🔓 Liberar</button>` : ''}
+          <div style="width:140px;text-align:center">
+            <select onchange="updateGuest(${g.id},'asistencia',this.value);renderSeleccion()" style="font-size:11px;padding:4px;width:100%">
+              <option ${asistencia==='Ceremonia + fiesta'?'selected':''}>Ceremonia + fiesta</option>
+              <option ${asistencia==='Solo fiesta'?'selected':''}>Solo fiesta</option>
+            </select>
+          </div>
+          <div style="width:230px;display:flex;gap:3px">
+            <button onclick="setDecision(${g.id},'Invitado importante')" title="Imprescindible"
+                    style="flex:1;padding:5px;font-size:11px;border-radius:4px;border:1px solid ${esInvitadoImp?'var(--accent)':'var(--line)'};background:${esInvitadoImp?'var(--accent)':'#fff'};color:${esInvitadoImp?'#fff':'var(--ink)'};cursor:pointer;font-weight:600">⭐</button>
+            <button onclick="setDecision(${g.id},'Invitado')" title="Invitar"
+                    style="flex:1.6;padding:5px;font-size:11px;border-radius:4px;border:1px solid ${esInvitado?'var(--green)':'var(--line)'};background:${esInvitado?'var(--green)':'#fff'};color:${esInvitado?'#fff':'var(--ink)'};cursor:pointer">✓ Sí</button>
+            <button onclick="setDecision(${g.id},'No invitar')" title="No invitar"
+                    style="flex:1.6;padding:5px;font-size:11px;border-radius:4px;border:1px solid ${esNoInvitar?'#6b7484':'var(--line)'};background:${esNoInvitar?'#6b7484':'#fff'};color:${esNoInvitar?'#fff':'var(--ink)'};cursor:pointer">✕ No</button>
+            ${manual ? `<button onclick="liberarDecisionManual(${g.id})" title="Liberar decisión manual"
+                    style="padding:5px 8px;font-size:11px;border-radius:4px;border:1px solid var(--line);background:#fff;cursor:pointer">🔓</button>` : ''}
           </div>
         </div>
       `;
     });
   }
 
-  listHtml += '</div>';
   container.innerHTML = listHtml;
 }
 
@@ -11417,13 +11091,12 @@ function resetTareasFilters(){
 // ============================================================
 const tiposIngreso = ['Aporte familiar','Ahorro novios','Regalo / depósito','Reembolso','Otro'];
 const estadosIngreso = ['Pendiente','Comprometido','Recibido'];
-const fuentesIngresoBase = ['Chato','Astrid','Pamela','Onofre','Novios','Otro'];
 
 function addIngreso(){
   if(!Array.isArray(data.ingresos)) data.ingresos = [];
   const newI = {
     id: Date.now(),
-    fuente: 'Chato',
+    fuente: 'Nuevo ingreso',
     tipo: 'Aporte familiar',
     monto: 0,
     fecha: new Date().toISOString().split('T')[0],
@@ -11471,7 +11144,7 @@ function updateIngreso(id, field, value){
   if(!Array.isArray(data.ingresos)) data.ingresos = [];
   const i = data.ingresos.find(x => x.id === id);
   if(!i) return;
-  i[field] = field === 'fuente' ? normalizePayerName(value) : value;
+  i[field] = value;
   saveData();
 }
 function updateGasto(id, field, value){
@@ -11701,19 +11374,15 @@ function renderPresupuesto(){
   if($('presBanqueteProyectado')) $('presBanqueteProyectado').textContent = formatMoney(banqueteProyectado);
   if($('presBanqueteProyectadoDelta')){
     if(cabezasSoloFiesta > 0){
-      $('presBanqueteProyectadoDelta').textContent = `${cabezasCeremonia}×${formatMoney(costoCeremonia)} + ${cabezasSoloFiesta}×${formatMoney(getCostConfig().fiesta)}`;
+      $('presBanqueteProyectadoDelta').textContent = `${cabezasCeremonia}×${formatMoney(costoCeremonia)} + ${cabezasSoloFiesta}×$36.000`;
     } else {
       $('presBanqueteProyectadoDelta').textContent = `${cabezasCeremonia} personas × ${formatMoney(costoCeremonia)}`;
     }
   }
 
-  // Métrica referencial desde Lista Final: costo de invitados y cruce por aportante
-  renderGuestCostComposition('finInvitadosCostoReferencial');
-  renderPayerFunding('finFinanciamientoInvitados', true);
-
   // Ingresos / aportes
   if($('ingresosTbody')) $('ingresosTbody').innerHTML = data.ingresos.map(i => `<tr>
-    <td><select onchange="updateIngreso(${i.id},'fuente',this.value);renderPresupuesto()">${payerSelectOptions(i.fuente)}</select></td>
+    <td><input type="text" value="${escapeHtml(i.fuente||'')}" onchange="updateIngreso(${i.id},'fuente',this.value);renderPresupuesto()"/></td>
     <td><select onchange="updateIngreso(${i.id},'tipo',this.value);renderPresupuesto()">${tiposIngreso.map(t=>`<option ${i.tipo===t?'selected':''}>${t}</option>`).join('')}</select></td>
     <td class="num">
       <input type="text"
@@ -11890,10 +11559,10 @@ function importData(ev){
 }
 
 function exportGuestsCSV(){
-  const headers = ['Nombres','Apellidos','Nombre completo','Vinculo','De parte de','Quien paga','Anos','Frecuencia','Importancia','Trae+1','Nombre+1','Asistencia','Decision','Estado RSVP','Telefono','Email','Dieta','Mesa','Notas','Cercania','Sugerencia'];
+  const headers = ['Nombre','Vinculo','De parte de','Anos','Frecuencia','Importancia','Trae+1','Nombre+1','Asistencia','Decision','Estado RSVP','Telefono','Email','Dieta','Mesa','Notas','Cercania','Sugerencia'];
   const rows = data.guests.map(g => {
     const score = calcCercania(g);
-    ensureGuestNameParts(g); return [g.nombres || '', g.apellidos || '', getGuestDisplayName(g), g.vinculo, g.departe, normalizePayerName(g.quienPaga), g.years, g.frecuencia, g.importancia, (g.acompanante && g.acompanante.trae)?'Si':'No', (g.acompanante && g.acompanante.nombre) || '', g.asistencia || 'Ceremonia + fiesta', normalizeDecisionLabel(g.decision), g.estadoRsvp, g.tel, g.email, g.dieta, g.mesa, g.notas, score.toFixed(2), sugerencia(score)];
+    return [g.nombre, g.vinculo, g.departe, g.years, g.frecuencia, g.importancia, (g.acompanante && g.acompanante.trae)?'Si':'No', (g.acompanante && g.acompanante.nombre) || '', g.asistencia || 'Ceremonia + fiesta', g.decision, g.estadoRsvp, g.tel, g.email, g.dieta, g.mesa, g.notas, score.toFixed(2), sugerencia(score)];
   });
   const csv = [headers, ...rows].map(r => r.map(c => `"${(c||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob([new Uint8Array([0xEF,0xBB,0xBF]), csv], {type:'text/csv;charset=utf-8'});
@@ -11917,14 +11586,12 @@ function exportListaCSV(soloCorte){
     source = getListaFinal();
   }
 
-  const headers = ['Nombre','Vinculo','De parte de','Quien paga','Asistencia','Costo referencial','Telefono','Email','Trae+1','Nombre+1','Save the Date','Fecha Save the Date','Invitacion','Fecha Invitacion','Estado RSVP','Fecha RSVP','Dieta','Mesa','Notas'];
+  const headers = ['Nombre','Vinculo','De parte de','Asistencia','Telefono','Email','Trae+1','Nombre+1','Save the Date','Fecha Save the Date','Invitacion','Fecha Invitacion','Estado RSVP','Fecha RSVP','Dieta','Mesa','Notas'];
   const rows = source.map(g => [
-    getGuestDisplayName(g) || '',
+    g.nombre || '',
     g.vinculo || '',
     g.departe || '',
-    normalizePayerName(g.quienPaga),
     g.asistencia || 'Ceremonia + fiesta',
-    getGuestCost(g),
     g.tel || '',
     g.email || '',
     (g.acompanante && g.acompanante.trae) ? 'Si' : 'No',
