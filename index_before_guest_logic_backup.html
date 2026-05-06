@@ -829,44 +829,6 @@ table.exec td.actions{text-align:center;width:40px}
   .topbar .chip{justify-self:start}
 }
 
-
-
-/* ============================================================
-   IPHONE VERTICAL · AJUSTE FINAL DE USABILIDAD
-   Prioriza lectura vertical y mantiene la navegación como app.
-   ============================================================ */
-@media (max-width:700px){
-  .sidebar{
-    max-height:calc(78px + env(safe-area-inset-bottom))!important;
-    padding:7px 9px calc(7px + env(safe-area-inset-bottom))!important;
-  }
-  .nav-btn{
-    flex:0 0 78px!important;
-    width:78px!important;
-    min-height:55px!important;
-    font-size:9.9px!important;
-    border-radius:13px!important;
-  }
-  .nav-btn .ico{font-size:16px!important}
-  .nav-btn[data-view="dashboard"],
-  .nav-btn[data-view="ideas"],
-  .nav-btn[data-view="solar"],
-  .nav-btn[data-view="lista"],
-  .nav-btn[data-view="rsvp"],
-  .nav-btn[data-view="presupuesto"]{
-    background:rgba(255,255,255,.07);
-  }
-  .view{padding-bottom:calc(104px + env(safe-area-inset-bottom))!important}
-  #seleccionContainer > div,
-  #mesasContainer,
-  #sinAsignarContainer{font-size:13px}
-  #seleccionContainer{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  #seleccionContainer > div{min-width:760px}
-  #rsvpTbody select,
-  #rsvpTbody input{font-size:14px;min-height:34px;border:1px solid var(--line);border-radius:7px;background:#fff;padding:5px 7px}
-  #rsvpTbody input[type="date"]{min-width:126px}
-}
-
 </style>
 </head>
 <body>
@@ -1120,7 +1082,7 @@ table.exec td.actions{text-align:center;width:40px}
     <div class="view-header">
       <div>
         <h2>Lista General · Invitados</h2>
-        <div class="lead">Base amplia de invitados potenciales: aquí registramos a todos quienes se nos ocurran, aunque la lista sea larguísima. Esta vista solo genera criterios, puntaje y referencia; no define automáticamente la lista final.</div>
+        <div class="lead">Aquí agregamos a todos quienes se nos ocurran. La info que ingresemos alimenta el sistema solar y la evaluación.</div>
       </div>
       <div class="view-actions">
         <button class="btn ghost" onclick="exportGuestsCSV()">⤓ CSV</button>
@@ -1181,7 +1143,7 @@ table.exec td.actions{text-align:center;width:40px}
         <option>Imprescindible</option>
         <option>Invitado</option>
         <option>Elegible</option>
-        <option>No invitar</option>
+        <option>No invitado</option>
       </select></div>
       <div class="group"><label>Decisión final</label><select id="evalFilterDec" onchange="renderEvaluacion()">
         <option value="">Todas</option>
@@ -1189,7 +1151,7 @@ table.exec td.actions{text-align:center;width:40px}
         <option>Invitado importante</option>
         <option>Invitado</option>
         <option>Suplente</option>
-        <option>No invitar</option>
+        <option>No invitado</option>
       </select></div>
       <div class="group"><label>Cercanía mínima</label><input type="range" id="evalMinScore" min="0" max="10" step="0.5" value="0" oninput="document.getElementById('evalScoreVal').textContent=this.value;renderEvaluacion()"/><div style="font-size:11px;color:var(--muted)">≥ <span id="evalScoreVal">0</span></div></div>
       <button class="btn ghost reset" onclick="resetEvalFilters()">Limpiar</button>
@@ -1215,7 +1177,7 @@ table.exec td.actions{text-align:center;width:40px}
     <div class="view-header">
       <div>
         <h2>Herramienta de Selección</h2>
-        <div class="lead">Aquí se decide realmente quién participa y cómo participa: <strong>Ceremonia + fiesta</strong> o <strong>Solo fiesta</strong>. La sugerencia del sistema es referencial; la selección manual es la fuente de verdad para la lista final.</div>
+        <div class="lead">Define a quién invitar (objetivo: 75% de la lista total). El sistema sugiere automáticamente; tu decisión manual siempre prevalece.</div>
       </div>
       <div class="view-actions">
         <button class="btn ghost" onclick="aplicarSugerenciasAutomaticas()">⚡ Aplicar sugerencias 75%</button>
@@ -1272,7 +1234,7 @@ table.exec td.actions{text-align:center;width:40px}
     <div class="view-header">
       <div>
         <h2>Lista final de invitaciones</h2>
-        <div class="lead">Lista depurada y operativa. Esta es la base oficial para trabajar mesas, costos por tipo de asistencia y seguimiento de confirmaciones.</div>
+        <div class="lead">Dashboard interactivo + lista detallada. Click en cualquier indicador o categoría para filtrar.</div>
       </div>
       <div class="view-actions">
         <button class="btn ghost" onclick="exportListaCSV()">⤓ Exportar CSV</button>
@@ -1459,7 +1421,7 @@ table.exec td.actions{text-align:center;width:40px}
     <div class="view-header">
       <div>
         <h2>Manejo de Confirmaciones</h2>
-        <div class="lead">Herramienta de tracking sobre la lista final: Save the Date, envío de invitación, RSVP, asistencia, acompañantes, restricciones y notas operativas.</div>
+        <div class="lead">Seguimiento del RSVP. Aquí marcamos quiénes ya nos confirmaron, cuándo y sus preferencias.</div>
       </div>
     </div>
 
@@ -1482,10 +1444,8 @@ table.exec td.actions{text-align:center;width:40px}
       <table class="exec">
         <thead><tr>
           <th>Invitado</th>
-          <th>Participación</th>
-          <th>Save the Date</th>
-          <th>Invitación</th>
-          <th>RSVP</th>
+          <th>Vínculo</th>
+          <th>Estado</th>
           <th>Fecha respuesta</th>
           <th>+1</th>
           <th>Restricciones</th>
@@ -8070,7 +8030,7 @@ function syncAll(reason){
       g.score = calculateGuestScore(g);
     });
 
-    // 4. Sincronizar Lista Final según decisiones tomadas en Herramienta de Selección
+    // 4. Aplicar regla 75% (respetando decisiones manuales)
     updateFinalGuestList();
 
     // 5. Sincronizar mesas con lista final
@@ -8095,7 +8055,7 @@ function syncAll(reason){
       reason: reason,
       stats: {
         invitados: data.guests.length,
-        invitadosFinales: getListaFinal().length,
+        invitadosFinales: data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision)).length,
         comprometido: (data.gastos||[]).reduce((s,g) => s + Number(g.monto||0), 0),
         ingresos: (data.ingresos||[]).reduce((s,i) => s + Number(i.monto||0), 0)
       }
@@ -8140,17 +8100,6 @@ function normalizeDataStructure(){
     if(typeof g.nombre1 !== 'undefined') delete g.nombre1;
     // Garantizar campo asistencia
     if(!g.asistencia) g.asistencia = 'Ceremonia + fiesta';
-
-    // Workflow de invitados: Lista General -> Selección -> Lista Final -> Mesas/Confirmaciones
-    g.decision = normalizeDecisionLabel(g.decision);
-    if(typeof g.decisionManual === 'undefined') g.decisionManual = false;
-    syncGuestFinalFlag(g);
-
-    // Tracking previo y posterior a la invitación
-    if(!g.saveTheDateEstado) g.saveTheDateEstado = 'Pendiente';
-    if(typeof g.fechaSaveTheDate === 'undefined') g.fechaSaveTheDate = '';
-    if(!g.invitacionEstado) g.invitacionEstado = 'Pendiente';
-    if(typeof g.fechaInvitacion === 'undefined') g.fechaInvitacion = '';
   });
 
   // Garantizar que cada servicio tiene costo y fechaPago
@@ -8227,88 +8176,42 @@ function calculateGuestScore(g){
   return score;
 }
 
-
-// ============================================================
-// FLUJO FUNCIONAL DE INVITADOS
-// ============================================================
-const INVITADO_FINAL_DECISIONES = ['Invitado importante', 'Invitado'];
-const DECISION_NO_INVITAR = 'No invitar';
-
-function normalizeDecisionLabel(decision){
-  if(!decision) return 'Sin decidir';
-  if(decision === 'No invitado') return DECISION_NO_INVITAR;
-  if(decision === 'No invitar') return DECISION_NO_INVITAR;
-  if(INVITADO_FINAL_DECISIONES.includes(decision)) return decision;
-  if(decision === 'Suplente') return 'Suplente';
-  return decision;
-}
-
-function isGuestSelected(g){
-  if(!g) return false;
-  return INVITADO_FINAL_DECISIONES.includes(normalizeDecisionLabel(g.decision));
-}
-
-function getListaGeneral(){
-  return Array.isArray(data.guests) ? data.guests : [];
-}
-
-function getListaFinal(){
-  return getListaGeneral().filter(isGuestSelected);
-}
-
-function syncGuestFinalFlag(g){
-  if(!g) return;
-  g.decision = normalizeDecisionLabel(g.decision);
-  g.enListaFinal = isGuestSelected(g);
-}
-
-function getGuestHeadcount(g){
-  return 1 + ((g && g.acompanante && g.acompanante.trae) ? 1 : 0);
-}
-
-function getGuestParticipation(g){
-  return (g && g.asistencia) ? g.asistencia : 'Ceremonia + fiesta';
-}
-
-function isCeremonyGuest(g){
-  return getGuestParticipation(g) === 'Ceremonia + fiesta';
-}
-
-function isSoloFiestaGuest(g){
-  return getGuestParticipation(g) === 'Solo fiesta';
-}
-
-function applyAutomaticGuestSuggestions(){
-  const ranked = [...getListaGeneral()]
-    .map(g => ({id:g.id, score:calculateGuestScore(g), importancia:g.importancia}))
-    .sort((a,b)=>b.score-a.score);
-  const target = Math.round(ranked.length * 0.75);
-  const sugeridos = new Set(ranked.slice(0,target).map(g=>g.id));
-
-  getListaGeneral().forEach(g => {
-    if(g.decisionManual === true) { syncGuestFinalFlag(g); return; }
-    if(g.importancia === 'Imprescindible') g.decision = 'Invitado importante';
-    else if(sugeridos.has(g.id)) g.decision = 'Invitado';
-    else g.decision = 'Suplente';
-    syncGuestFinalFlag(g);
-  });
-}
-
 function updateFinalGuestList(){
-  // La Lista General NO alimenta automáticamente la Lista Final.
-  // Esta función solo mantiene coherencia entre la decisión tomada en
-  // Herramienta de Selección y el flag enListaFinal.
-  getListaGeneral().forEach(g => {
-    g.score = calculateGuestScore(g);
-    syncGuestFinalFlag(g);
+  const total = data.guests.length;
+  if(total === 0) return;
+  const target = Math.round(total * 0.75);
+  
+  // Crear ranking por score
+  const ranked = [...data.guests]
+    .map(g => ({...g, _calculatedScore: calculateGuestScore(g)}))
+    .sort((a, b) => b._calculatedScore - a._calculatedScore);
+  
+  ranked.forEach((g, i) => {
+    const original = data.guests.find(x => x.id === g.id);
+    if(!original) return;
+    
+    // Respetar decisiones manuales (NO sobrescribir decision)
+    if(original.decisionManual !== true){
+      if(g.importancia === 'Imprescindible'){
+        original.decision = 'Invitado importante';
+      } else if(i < target){
+        original.decision = 'Invitado';
+      } else {
+        original.decision = 'Suplente';
+      }
+    }
+
+    // Sincronizar enListaFinal con la decisión actual (manual o automática)
+    original.enListaFinal = ['Invitado importante', 'Invitado'].includes(original.decision);
   });
 }
 
 function syncTablesWithFinalGuests(){
   // Las mesas SOLO incluyen invitados a la ceremonia (Ceremonia + fiesta).
   // Los 'Solo fiesta' no participan del armado de mesas porque llegan después de la cena.
-  const idsValidos = new Set(getListaFinal()
-    .filter(isCeremonyGuest)
+  const idsValidos = new Set(data.guests
+    .filter(g => ['Invitado importante','Invitado'].includes(g.decision))
+    .filter(g => (g.asistencia || 'Ceremonia + fiesta') === 'Ceremonia + fiesta')
     .map(g => g.id));
 
   if(typeof mesasPropuestas !== 'undefined' && Array.isArray(mesasPropuestas)){
@@ -8428,7 +8331,7 @@ function updateSidebarMiniDashboard(){
   const $ = id => document.getElementById(id);
   
   // === INVITADOS ===
-  const invitados = getListaFinal();
+  const invitados = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   const totalPersonas = invitados.reduce((sum, g) => sum + 1 + ((g.acompanante && g.acompanante.trae) ? 1 : 0), 0);
   const totalLista = data.guests.length + data.guests.filter(g => g.acompanante && g.acompanante.trae).length;
   
@@ -8724,9 +8627,8 @@ function frecuenciaMult(f){
 }
 
 function calcCercania(g){
-  // Score de referencia 0–10 calculado siempre en vivo desde los criterios de Lista General.
-  // No define por sí solo la lista final: solo orienta la decisión en Herramienta de Selección.
-  return (calculateGuestScore(g) || 0) / 20;
+  // Usar el nuevo sistema de scoring basado en reglas
+  return g.score / 20;  // Scale to 0-10
 }
 
 function asignarOrbita(score){
@@ -8793,7 +8695,7 @@ function renderDashboard(){
   // KPIs
   document.getElementById('kpiPotenciales').textContent = data.guests.length;
 
-  const seleccionados = getListaFinal();
+  const seleccionados = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   document.getElementById('kpiSeleccionados').textContent = seleccionados.length;
   const sinDecidir = data.guests.filter(g => !g.decision || g.decision === 'Sin decidir').length;
   document.getElementById('kpiSeleccionadosDelta').textContent = sinDecidir > 0 ? sinDecidir + ' por decidir' : 'todo decidido';
@@ -8894,7 +8796,7 @@ function computeAlerts(){
     alerts.push({tipo:'med', titulo:'Más del 70% del presupuesto comprometido', desc:'Revisar gastos pendientes'});
   }
   // RSVP pendiente
-  const pendientes = getListaFinal().filter(g => g.estadoRsvp === 'Pendiente').length;
+  const pendientes = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision) && g.estadoRsvp === 'Pendiente').length;
   if(pendientes > 10){
     alerts.push({tipo:'med', titulo:`${pendientes} confirmaciones pendientes`, desc:'Hacer seguimiento RSVP'});
   }
@@ -8938,7 +8840,7 @@ function renderUpcomingPayments(){
 function updateNavBadges(){
   const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
   set('navIdeasCount', data.guests.length);
-  const lista = getListaFinal().length;
+  const lista = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision)).length;
   set('navListaCount', lista);
   set('navCompCount', data.lugares.length);
   const tareasPend = data.tareas.filter(t => t.estado !== 'Completada').length;
@@ -8981,7 +8883,7 @@ function renderResumen(){
   document.getElementById('progressDetail').innerHTML = `
     <div class="data-grid" style="grid-template-columns:repeat(4,1fr)">
       <div class="data-cell"><div class="k">Personas en lluvia ideas</div><div class="v lg">${totalIdeas}</div><div class="sub">objetivo: 120-150</div></div>
-      <div class="data-cell"><div class="k">Lista final actual</div><div class="v lg">${getListaFinal().length}</div><div class="sub">objetivo: 80-120</div></div>
+      <div class="data-cell"><div class="k">Lista final actual</div><div class="v lg">${data.guests.filter(g=>['Invitado importante','Invitado'].includes(g.decision)).length}</div><div class="sub">objetivo: 80-120</div></div>
       <div class="data-cell"><div class="k">Lugares evaluados</div><div class="v lg">${data.lugares.length}</div><div class="sub">${data.lugares.filter(l=>l.estado==='Visitado').length} visitados</div></div>
       <div class="data-cell"><div class="k">Servicios contratados</div><div class="v lg">${data.servicios.filter(s=>s.estado==='Confirmado'||s.estado==='Pagado').length}</div><div class="sub">de ${data.servicios.length} cotizados</div></div>
       <div class="data-cell"><div class="k">Hitos cumplidos</div><div class="v lg">${hitosDone} / ${hitosTareas.length}</div><div class="sub">${hitosPct.toFixed(0)}% del plan</div></div>
@@ -9078,8 +8980,7 @@ function updateGuest(id, field, value){
   // Si edita decision manualmente, marcar como decisión manual
   if(field === 'decision'){
     g.decisionManual = true;
-    g.decision = normalizeDecisionLabel(value);
-    syncGuestFinalFlag(g);
+    g.enListaFinal = ['Invitado importante','Invitado'].includes(value);
   }
 
   saveData();
@@ -9255,7 +9156,7 @@ function renderEvaluacion(){
         <option ${g.decision==='Invitado importante'?'selected':''}>Invitado importante</option>
         <option ${g.decision==='Invitado'?'selected':''}>Invitado</option>
         <option ${g.decision==='Suplente'?'selected':''}>Suplente</option>
-        <option ${normalizeDecisionLabel(g.decision)===DECISION_NO_INVITAR?'selected':''}>No invitar</option>
+        <option ${g.decision==='No invitado'?'selected':''}>No invitado</option>
       </select></td>
     </tr>`;
   }).join('');
@@ -9281,7 +9182,7 @@ function renderSolar(){
 
   let list;
   if(solarView === 'final'){
-    list = getListaFinal();
+    list = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   }else{
     list = data.guests;
   }
@@ -9445,7 +9346,7 @@ function renderLista(){
   const mesa = $('listaMesa')?.value || '';
   const departe = $('listaDepartFiltro')?.value || '';
 
-  const all = getListaFinal();
+  const all = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   let list = [...all];
 
   // Filtros básicos
@@ -9701,7 +9602,7 @@ function renderSeleccion(){
   let list = [...data.guests];
   
   // Calcular score para cada uno
-  list = list.map(g => ({...g, _score: calcCercania(g), _rawScore: calculateGuestScore(g)}));
+  list = list.map(g => ({...g, _score: calculateGuestScore(g)}));
   
   // Aplicar filtros
   if(search) list = list.filter(g => (g.nombre||'').toLowerCase().includes(search));
@@ -9710,25 +9611,17 @@ function renderSeleccion(){
   if(fImp) list = list.filter(g => g.importancia === fImp);
   
   if(fEstado === 'Sin decidir') list = list.filter(g => !g.decision || g.decision === 'Sin decidir');
-  else if(fEstado === 'Invitar') list = list.filter(isGuestSelected);
-  else if(fEstado === 'No invitar') list = list.filter(g => normalizeDecisionLabel(g.decision) === DECISION_NO_INVITAR);
+  else if(fEstado === 'Invitar') list = list.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
+  else if(fEstado === 'No invitar') list = list.filter(g => g.decision === 'No invitar');
   else if(fEstado === 'manual') list = list.filter(g => g.decisionManual);
   
   // Ordenar por score descendente
   list.sort((a, b) => b._score - a._score);
-
-  // Ranking referencial global: sirve como sugerencia, no como decisión automática.
-  const target75Ref = Math.round(data.guests.length * 0.75);
-  const rankedIdsSugeridos = new Set([...data.guests]
-    .map(g => ({id:g.id, score:calculateGuestScore(g), importancia:g.importancia}))
-    .sort((a,b)=>b.score-a.score)
-    .slice(0,target75Ref)
-    .map(g=>g.id));
   
   // === RENDERIZAR KPIs ===
   const total = data.guests.length;
-  const si = getListaFinal().length;
-  const no = data.guests.filter(g => normalizeDecisionLabel(g.decision) === DECISION_NO_INVITAR).length;
+  const si = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision)).length;
+  const no = data.guests.filter(g => g.decision === 'No invitar').length;
   const pend = total - si - no;
   const target = Math.round(total * 0.75);
   const faltan = Math.max(0, target - si);
@@ -9737,8 +9630,8 @@ function renderSeleccion(){
   if($('selKpiSi')) $('selKpiSi').textContent = si;
   if($('selKpiNo')) $('selKpiNo').textContent = no;
   if($('selKpiPendiente')) $('selKpiPendiente').textContent = pend;
-  if($('selKpiSiPct')) $('selKpiSiPct').textContent = (total ? Math.round(si/total*100) : 0) + '%';
-  if($('selKpiNoPct')) $('selKpiNoPct').textContent = (total ? Math.round(no/total*100) : 0) + '%';
+  if($('selKpiSiPct')) $('selKpiSiPct').textContent = Math.round(si/total*100) + '%';
+  if($('selKpiNoPct')) $('selKpiNoPct').textContent = Math.round(no/total*100) + '%';
   if($('selKpiTarget')) $('selKpiTarget').textContent = faltan;
   if($('selVisibles')) $('selVisibles').textContent = list.length;
   
@@ -9749,8 +9642,8 @@ function renderSeleccion(){
     let distHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px">';
     cats.forEach(cat => {
       const guestsCat = data.guests.filter(g => g.vinculo === cat);
-      const siCat = guestsCat.filter(isGuestSelected).length;
-      const noCat = guestsCat.filter(g => normalizeDecisionLabel(g.decision) === DECISION_NO_INVITAR).length;
+      const siCat = guestsCat.filter(g => ['Invitado importante','Invitado'].includes(g.decision)).length;
+      const noCat = guestsCat.filter(g => g.decision === 'No invitar').length;
       const pendCat = guestsCat.length - siCat - noCat;
       const pctSi = guestsCat.length > 0 ? Math.round(siCat/guestsCat.length*100) : 0;
       
@@ -9794,16 +9687,17 @@ function renderSeleccion(){
     listHtml += '<div style="padding:30px;text-align:center;color:var(--muted)">Sin invitados que mostrar</div>';
   } else {
     list.forEach((g, idx) => {
-      const decisionActual = normalizeDecisionLabel(g.decision);
+      const decisionActual = g.decision || 'Sin decidir';
       const esInvitadoImp = decisionActual === 'Invitado importante';
       const esInvitado = decisionActual === 'Invitado';
-      const esNoInvitar = normalizeDecisionLabel(decisionActual) === DECISION_NO_INVITAR;
+      const esNoInvitar = decisionActual === 'No invitar';
       const manual = g.decisionManual;
 
-      // Sugerencia automática referencial sobre el ranking global.
+      // Sugerencia automática (sin recalcular el ranking en cada fila — usar el de la lista actual)
+      const target75 = Math.round(data.guests.length * 0.75);
       const sugerido = g.importancia === 'Imprescindible'
         ? 'Imprescindible'
-        : (rankedIdsSugeridos.has(g.id) ? 'Invitar' : 'Revisar');
+        : (idx < target75 ? 'Invitar' : 'No invitar');
       const sugColor = sugerido === 'Imprescindible' ? '#b3322c' : sugerido === 'Invitar' ? '#1f8a5b' : '#6b7484';
 
       const asistencia = g.asistencia || 'Ceremonia + fiesta';
@@ -9852,11 +9746,10 @@ function renderSeleccion(){
 function setDecision(id, decision){
   const g = data.guests.find(x => x.id === id);
   if(!g) return;
-  g.decision = normalizeDecisionLabel(decision);
+  g.decision = decision;
   g.decisionManual = true;
-  syncGuestFinalFlag(g);
-  if(isGuestSelected(g) && !g.asistencia) g.asistencia = 'Ceremonia + fiesta';
   saveData();
+  // Auto-sync (sin renderear todo)
   renderSeleccion();
   updateSidebarMiniDashboard();
   updateNavBadges();
@@ -9866,10 +9759,8 @@ function liberarDecisionManual(id){
   const g = data.guests.find(x => x.id === id);
   if(!g) return;
   g.decisionManual = false;
-  // Al liberar la decisión manual, dejamos el estado en Sin decidir.
-  // La sugerencia queda visible en la herramienta, pero no cambia la lista final sola.
-  g.decision = 'Sin decidir';
-  syncGuestFinalFlag(g);
+  // Recalcular según regla 75%
+  if(typeof updateFinalGuestList === 'function') updateFinalGuestList();
   saveData();
   renderSeleccion();
   updateSidebarMiniDashboard();
@@ -9915,8 +9806,18 @@ function exportSeleccionCSV(){
 }
 
 function aplicarSugerenciasAutomaticas(){
-  if(!confirm('¿Aplicar la sugerencia automática del 75%? Esto modificará solo las decisiones que NO estén bloqueadas manualmente (🔒).')) return;
-  applyAutomaticGuestSuggestions();
+  if(!confirm('¿Aplicar la sugerencia automática del 75%? Esto modificará las decisiones que NO sean manuales (las marcadas con 🔒 se respetan).')) return;
+  
+  // Liberar todas las decisiones no manuales
+  data.guests.forEach(g => {
+    if(!g.decisionManual){
+      g.decision = '';
+    }
+  });
+  
+  // Aplicar regla 75%
+  if(typeof updateFinalGuestList === 'function') updateFinalGuestList();
+  
   saveData();
   renderSeleccion();
   updateSidebarMiniDashboard();
@@ -9931,8 +9832,8 @@ let mesasPropuestas = [];
 let invitadoArrastrado = null;
 
 function renderMesas(){
-  // Mesas trabaja sobre Lista Final, pero solo con personas de Ceremonia + fiesta.
-  const listaFinal = getListaFinal().filter(isCeremonyGuest);
+  // Obtener invitados de la lista final (incluidos acompañantes)
+  const listaFinal = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   
   // Calcular invitados ya asignados a alguna mesa
   const idsAsignados = new Set();
@@ -10128,7 +10029,9 @@ const MESA_CAP_MAX = 12;
 function generarPropuestasMesas(){
   // SOLO se sientan en mesa los invitados a Ceremonia + fiesta.
   // Los 'Solo fiesta' llegan después de la cena, no participan del armado de mesas.
-  const listaFinal = getListaFinal().filter(isCeremonyGuest);
+  const listaFinal = data.guests
+    .filter(g => ['Invitado importante','Invitado'].includes(g.decision))
+    .filter(g => (g.asistencia || 'Ceremonia + fiesta') === 'Ceremonia + fiesta');
 
   if(listaFinal.length === 0){
     alert('No hay invitados a Ceremonia + fiesta. Marca personas como "Invitar" en la Herramienta de Selección y verifica que su asistencia sea "Ceremonia + fiesta".');
@@ -10468,27 +10371,20 @@ function guardarMesasFinales(){
 // RSVP
 // ============================================================
 function renderRsvp(){
-  const all = getListaFinal();
+  const all = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   const confirm = all.filter(g => g.estadoRsvp === 'Confirmado').length;
   const no = all.filter(g => g.estadoRsvp === 'No asiste').length;
   const pend = all.length - confirm - no;
-  const stdEnviado = all.filter(g => g.saveTheDateEstado === 'Enviado').length;
-  const invitacionEnviada = all.filter(g => g.invitacionEstado === 'Enviada').length;
-  const ceremonia = all.filter(isCeremonyGuest).length;
-  const soloFiesta = all.filter(isSoloFiestaGuest).length;
 
   document.getElementById('rsvpProgress').innerHTML = `
     <div class="data-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:10px">
-      <div class="data-cell"><div class="k">Save the Date enviados</div><div class="v lg" style="color:var(--blue)">${stdEnviado}</div><div class="sub">de ${all.length} lista final</div></div>
-      <div class="data-cell"><div class="k">Invitaciones enviadas</div><div class="v lg" style="color:var(--accent)">${invitacionEnviada}</div><div class="sub">paso previo a RSVP</div></div>
-      <div class="data-cell"><div class="k">RSVP confirmados</div><div class="v lg" style="color:var(--green)">${confirm}</div><div class="sub">${pend} pendientes · ${no} no asisten</div></div>
-      <div class="data-cell"><div class="k">Ceremonia + fiesta</div><div class="v lg">${ceremonia}</div><div class="sub">base para mesas</div></div>
-      <div class="data-cell"><div class="k">Solo fiesta</div><div class="v lg">${soloFiesta}</div><div class="sub">no requiere mesa de cena</div></div>
-      <div class="data-cell"><div class="k">Personas totales</div><div class="v lg">${all.reduce((s,g)=>s+getGuestHeadcount(g),0)}</div><div class="sub">incluye acompañantes</div></div>
+      <div class="data-cell"><div class="k">Confirmados</div><div class="v lg" style="color:var(--green)">${confirm}</div></div>
+      <div class="data-cell"><div class="k">Pendientes</div><div class="v lg" style="color:var(--amber)">${pend}</div></div>
+      <div class="data-cell"><div class="k">No asisten</div><div class="v lg" style="color:var(--red)">${no}</div></div>
     </div>
-    <div class="bar-row"><div class="label">Save the Date</div><div class="track"><div class="fill bl" style="width:${all.length?stdEnviado/all.length*100:0}%"></div></div><div class="num">${all.length?(stdEnviado/all.length*100).toFixed(0):0}%</div></div>
-    <div class="bar-row"><div class="label">Invitación</div><div class="track"><div class="fill acc" style="width:${all.length?invitacionEnviada/all.length*100:0}%"></div></div><div class="num">${all.length?(invitacionEnviada/all.length*100).toFixed(0):0}%</div></div>
-    <div class="bar-row"><div class="label">RSVP confirmado</div><div class="track"><div class="fill gd" style="width:${all.length?confirm/all.length*100:0}%"></div></div><div class="num">${all.length?(confirm/all.length*100).toFixed(0):0}%</div></div>
+    <div class="bar-row"><div class="label">Confirmados</div><div class="track"><div class="fill gd" style="width:${all.length?confirm/all.length*100:0}%"></div></div><div class="num">${all.length?(confirm/all.length*100).toFixed(0):0}%</div></div>
+    <div class="bar-row"><div class="label">Pendientes</div><div class="track"><div class="fill wn" style="width:${all.length?pend/all.length*100:0}%"></div></div><div class="num">${all.length?(pend/all.length*100).toFixed(0):0}%</div></div>
+    <div class="bar-row"><div class="label">No asisten</div><div class="track"><div class="fill dg" style="width:${all.length?no/all.length*100:0}%"></div></div><div class="num">${all.length?(no/all.length*100).toFixed(0):0}%</div></div>
   `;
 
   // Dietary
@@ -10501,49 +10397,19 @@ function renderRsvp(){
     <div class="bar-row" style="grid-template-columns:1fr auto"><div class="label">${escapeHtml(d)}</div><div class="num"><span class="pill amber">${c}</span></div></div>
   `).join('') : '<div class="empty" style="padding:20px"><div class="desc">Sin restricciones registradas</div></div>';
 
-  // Tabla detalle editable: fuente de seguimiento final
+  // Tabla detalle
   document.getElementById('rsvpTbody').innerHTML = all.map(g => {
     const status = g.estadoRsvp || 'Pendiente';
-    const std = g.saveTheDateEstado || 'Pendiente';
-    const inv = g.invitacionEstado || 'Pendiente';
-    const asistencia = getGuestParticipation(g);
     return `<tr>
-      <td><span class="name">${escapeHtml(g.nombre)}</span><div class="role">${escapeHtml(g.vinculo||'—')} · ${escapeHtml(g.departe||'—')}</div></td>
-      <td>
-        <select onchange="updateGuest(${g.id},'asistencia',this.value);syncManual({fromNav:true});renderRsvp();updateNavBadges()">
-          <option ${asistencia==='Ceremonia + fiesta'?'selected':''}>Ceremonia + fiesta</option>
-          <option ${asistencia==='Solo fiesta'?'selected':''}>Solo fiesta</option>
-        </select>
-      </td>
-      <td>
-        <select onchange="updateGuest(${g.id},'saveTheDateEstado',this.value);if(this.value==='Enviado'&&!data.guests.find(x=>x.id===${g.id}).fechaSaveTheDate){updateGuest(${g.id},'fechaSaveTheDate',new Date().toISOString().split('T')[0])};renderRsvp()">
-          <option ${std==='Pendiente'?'selected':''}>Pendiente</option>
-          <option ${std==='Enviado'?'selected':''}>Enviado</option>
-          <option ${std==='No aplica'?'selected':''}>No aplica</option>
-        </select>
-        <input type="date" value="${g.fechaSaveTheDate||''}" onchange="updateGuest(${g.id},'fechaSaveTheDate',this.value);renderRsvp()" style="margin-top:4px;width:100%"/>
-      </td>
-      <td>
-        <select onchange="updateGuest(${g.id},'invitacionEstado',this.value);if(this.value==='Enviada'&&!data.guests.find(x=>x.id===${g.id}).fechaInvitacion){updateGuest(${g.id},'fechaInvitacion',new Date().toISOString().split('T')[0])};renderRsvp()">
-          <option ${inv==='Pendiente'?'selected':''}>Pendiente</option>
-          <option ${inv==='Enviada'?'selected':''}>Enviada</option>
-          <option ${inv==='No enviar'?'selected':''}>No enviar</option>
-        </select>
-        <input type="date" value="${g.fechaInvitacion||''}" onchange="updateGuest(${g.id},'fechaInvitacion',this.value);renderRsvp()" style="margin-top:4px;width:100%"/>
-      </td>
-      <td>
-        <select onchange="updateGuest(${g.id},'estadoRsvp',this.value);if(this.value==='Confirmado'&&!data.guests.find(x=>x.id===${g.id}).fechaRsvp){updateGuest(${g.id},'fechaRsvp',new Date().toISOString().split('T')[0])};renderRsvp();updateSidebarMiniDashboard()">
-          <option ${status==='Pendiente'?'selected':''}>Pendiente</option>
-          <option ${status==='Confirmado'?'selected':''}>Confirmado</option>
-          <option ${status==='No asiste'?'selected':''}>No asiste</option>
-        </select>
-      </td>
-      <td><input type="date" value="${g.fechaRsvp||''}" onchange="updateGuest(${g.id},'fechaRsvp',this.value);renderRsvp()"/></td>
+      <td><span class="name">${escapeHtml(g.nombre)}</span></td>
+      <td>${escapeHtml(g.vinculo)||'—'}</td>
+      <td><span class="status-badge ${status==='Confirmado'?'status-ok':status==='No asiste'?'status-vencido':'status-pending'}"><span class="dot ${status==='Confirmado'?'ok':status==='No asiste'?'vencido':'pending'}"></span>${status}</span></td>
+      <td>${g.fechaRsvp ? fmtDate(g.fechaRsvp) : '—'}</td>
       <td>${(g.acompanante && g.acompanante.trae) ? '✓ ' + escapeHtml((g.acompanante && g.acompanante.nombre) || 'sin nombre') : '—'}</td>
-      <td><input type="text" value="${escapeHtml(g.dieta||'')}" placeholder="—" onchange="updateGuest(${g.id},'dieta',this.value);renderRsvp()"/></td>
-      <td><input type="text" value="${escapeHtml(g.notas||'')}" placeholder="Notas" onchange="updateGuest(${g.id},'notas',this.value)"/></td>
+      <td>${escapeHtml(g.dieta)||'—'}</td>
+      <td>${escapeHtml(g.notas)||'—'}</td>
     </tr>`;
-  }).join('') || `<tr><td colspan="9"><div class="empty"><div class="title">Sin invitados en lista final</div><div class="desc">Selecciona invitados en la Herramienta de Selección.</div></div></td></tr>`;
+  }).join('') || `<tr><td colspan="7"><div class="empty"><div class="title">Sin invitados</div></div></td></tr>`;
 }
 
 // ============================================================
@@ -11364,7 +11230,7 @@ function renderPresupuesto(){
   if($('presAvanceTexto')) $('presAvanceTexto').textContent = `${formatMoney(totalComprometido)} de ${formatMoney(meta)} comprometido · ${formatMoney(totalPagado)} pagado`;
 
   // Costo banquetería proyectado (real según asistencia)
-  const allFinal = getListaFinal();
+  const allFinal = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   const cabezasCeremonia = allFinal.filter(g => (g.asistencia||'Ceremonia + fiesta')==='Ceremonia + fiesta')
     .reduce((s,g)=>s + 1 + ((g.acompanante && g.acompanante.trae)?1:0), 0);
   const cabezasSoloFiesta = allFinal.filter(g => g.asistencia==='Solo fiesta')
@@ -11583,10 +11449,10 @@ function exportListaCSV(soloCorte){
     source = _listaFiltradaActual;
   } else {
     // Por defecto: toda la lista final (Invitado importante / Invitado)
-    source = getListaFinal();
+    source = data.guests.filter(g => ['Invitado importante','Invitado'].includes(g.decision));
   }
 
-  const headers = ['Nombre','Vinculo','De parte de','Asistencia','Telefono','Email','Trae+1','Nombre+1','Save the Date','Fecha Save the Date','Invitacion','Fecha Invitacion','Estado RSVP','Fecha RSVP','Dieta','Mesa','Notas'];
+  const headers = ['Nombre','Vinculo','De parte de','Asistencia','Telefono','Email','Trae+1','Nombre+1','Estado RSVP','Dieta','Mesa','Notas'];
   const rows = source.map(g => [
     g.nombre || '',
     g.vinculo || '',
@@ -11596,12 +11462,7 @@ function exportListaCSV(soloCorte){
     g.email || '',
     (g.acompanante && g.acompanante.trae) ? 'Si' : 'No',
     (g.acompanante && g.acompanante.nombre) || '',
-    g.saveTheDateEstado || 'Pendiente',
-    g.fechaSaveTheDate || '',
-    g.invitacionEstado || 'Pendiente',
-    g.fechaInvitacion || '',
     g.estadoRsvp || 'Pendiente',
-    g.fechaRsvp || '',
     g.dieta || '',
     g.mesa || '',
     g.notas || ''
